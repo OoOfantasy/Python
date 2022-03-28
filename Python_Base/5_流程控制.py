@@ -193,21 +193,36 @@ class Main(object):
     # 猜年龄
     def guess_age(self):
         import random as rd
-        min = rd.randint(1,6)
-        max = rd.randint(6,11)
-        computer = rd.randint(min,max)
-        for i in range(3):
-            user = int(input('小明今年(%d-%d岁)猜猜具体多少岁:'%(min,max)))
-            if user > computer:
-                print('猜大了,在想想.')
-            elif user < computer:
-                print('猜小了,在想想.')
+        reboot = True
+        while reboot:
+            min = rd.randint(1,6)
+            max = rd.randint(6,11)
+            computer = rd.randint(min,max)
+            for i in range(3):
+                user = int(input('小明今年(%d-%d岁)猜猜具体多少岁:'%(min,max)))
+                if user > computer:
+                    print('猜大了,在想想.')
+                elif user < computer:
+                    print('猜小了,在想想.')
+                else:
+                    print('猜对了,恭喜你.')
+                    break
             else:
-                print('猜对了,恭喜你.')
-                break
-        else:
-            print('小明今年%d岁啊.'%computer)
-            print('机会用完了,祝你下次成功.')
+                reboot = False
+                print('小明今年%d岁啊.'%computer)
+                print('机会用完了,还要继续吗？')
+            while True:
+                re = input('[Y|N]:')
+                if re == 'N' or re == 'n':
+                    print('-- 再见 --')
+                    break
+                elif re == 'Y' or re == 'y':
+                    print('再给你3次机会!')
+                    reboot = True
+                    break
+                else:
+                    print('输入不正确请重新输入!')
+
     # BMI计算
     def bmi(self):
         height = 1.78
@@ -244,4 +259,4 @@ a = Main()
 # a.For_str_continue()
 # a.For_else()
 # a.guess_age()
-# a.bmi()
+a.bmi()
